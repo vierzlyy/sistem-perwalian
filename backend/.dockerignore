@@ -1,12 +1,14 @@
 vendor
 node_modules
 .env
-.env.*
+.env.local
+.env.production
+.env.staging
 .git
 .gitignore
+.gitattributes
 storage/logs/*
 storage/framework/cache/*
 storage/framework/sessions/*
 storage/framework/views/*
-.phtunit.cache
-.gitattributes
+.phpunit.result.cache
