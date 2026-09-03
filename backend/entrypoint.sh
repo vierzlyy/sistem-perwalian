@@ -22,7 +22,9 @@ fi
 
 # Set production settings
 sed -i "s|APP_ENV=.*|APP_ENV=production|" .env
-sed -i "s|APP_DEBUG=.*|APP_DEBUG=false|" .env
+[ -n "$APP_DEBUG" ] && sed -i "s|APP_DEBUG=.*|APP_DEBUG=$APP_DEBUG|" .env
+[ -n "$APP_URL" ] && sed -i "s|APP_URL=.*|APP_URL=$APP_URL|" .env
+[ -n "$SANCTUM_STATEFUL_DOMAINS" ] && sed -i "/^SANCTUM_STATEFUL_DOMAINS=/d" .env && echo "SANCTUM_STATEFUL_DOMAINS=$SANCTUM_STATEFUL_DOMAINS" >> .env
 
 # Generate APP_KEY jika belum ada
 if ! grep -q "APP_KEY=base64:" .env 2>/dev/null; then
