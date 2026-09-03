@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libjpeg-dev \
         libfreetype6-dev \
         libpq-dev \
+        libicu-dev \
+        libcurl4-openssl-dev \
         unzip \
         git \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -19,6 +21,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         mbstring \
         zip \
         gd \
+        bcmath \
+        intl \
+        exif \
+        pcntl \
     && rm -rf /var/lib/apt/lists/*
 
 # Composer
@@ -32,11 +38,11 @@ COPY . .
 # Install dependencies (--no-dev untuk production, --no-scripts agar tidak perlu APP_KEY saat build)
 RUN composer install --optimize-autoloader --no-dev --no-scripts --no-interaction
 
-# Bersihkan cache default
-RUN php artisan config:clear 2>/dev/null || true
+# Beri izin eksekusi ke entrypoint
+RUN chmod +x entrypoint.sh
 
 ENV PORT=8000
 EXPOSE 8000
 
-# Jalankan migrasi, seeder (admin), lalu serve API
-CMD ["sh", "-c", "php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=$PORT"]
+# Entrypoint: generate APP_KEY, migrasi, seeder, lalu serve API
+CMD ["sh", "entrypoint.sh"]
