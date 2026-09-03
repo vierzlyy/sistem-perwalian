@@ -38,6 +38,11 @@ COPY . .
 # Install dependencies (--no-dev untuk production, --no-scripts agar tidak perlu APP_KEY saat build)
 RUN composer install --optimize-autoloader --no-dev --no-scripts --no-interaction
 
+# Persiapkan struktur storage & pastikan writable untuk Laravel
+RUN mkdir -p storage/framework/{cache/data,sessions,views} \
+    storage/logs \
+    && chmod -R 775 storage bootstrap/cache
+
 # Beri izin eksekusi ke entrypoint
 RUN chmod +x entrypoint.sh
 
