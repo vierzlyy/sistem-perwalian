@@ -1,0 +1,6 @@
+﻿"LAPORAN DATA MAHASISWA"
+"Tanggal Cetak";"20-08-2026 10:06"
+
+No;NIM;Nama;Email;"No Telepon";Alamat;Prodi;Angkatan;"Dosen Wali";Status
+1;1224005;"arya kusuma dinata";arya@gmail.com;082116776440;"Jl. Trs. Pasirkoja Rd. Dewi 5A No.16";"Teknik Informatika";2024;-;Aktif
+2;3221001;"Ahmad Ahmad";ahmad@stmikbandung.ac.id;-;-;"Sistem Informasi";2021;"Bambang Sutrisno";Aktif
