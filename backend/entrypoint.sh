@@ -9,15 +9,23 @@ if [ ! -f .env ]; then
     cp .env.example .env
 fi
 
-# Isi variabel database dari Railway PostgreSQL
-if [ -n "$PGHOST" ]; then
-    echo "Mengatur koneksi database dari Railway PostgreSQL..."
+# Isi variabel database dari Railway PostgreSQL (pakai DB_HOST/DB_PORT atau PGHOST/PGPORT)
+DBH="${DB_HOST:-$PGHOST}"
+DBP="${DB_PORT:-$PGPORT}"
+DBN="${DB_DATABASE:-$PGDATABASE}"
+DBU="${DB_USERNAME:-$PGUSER}"
+DBW="${DB_PASSWORD:-$PGPASSWORD}"
+
+if [ -n "$DBH" ]; then
+    echo "Mengatur koneksi database: $DBH:$DBP/$DBN"
     sed -i "s|DB_CONNECTION=.*|DB_CONNECTION=pgsql|" .env
-    sed -i "s|DB_HOST=.*|DB_HOST=$PGHOST|" .env
-    sed -i "s|DB_PORT=.*|DB_PORT=$PGPORT|" .env
-    sed -i "s|DB_DATABASE=.*|DB_DATABASE=$PGDATABASE|" .env
-    sed -i "s|DB_USERNAME=.*|DB_USERNAME=$PGUSER|" .env
-    sed -i "s|DB_PASSWORD=.*|DB_PASSWORD=$PGPASSWORD|" .env
+    sed -i "s|DB_HOST=.*|DB_HOST=$DBH|" .env
+    sed -i "s|DB_PORT=.*|DB_PORT=$DBP|" .env
+    sed -i "s|DB_DATABASE=.*|DB_DATABASE=$DBN|" .env
+    sed -i "s|DB_USERNAME=.*|DB_USERNAME=$DBU|" .env
+    sed -i "s|DB_PASSWORD=.*|DB_PASSWORD=$DBW|" .env
+else
+    echo "WARNING: Tidak ada variabel database ditemukan"
 fi
 
 # Set production settings
