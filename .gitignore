@@ -1,0 +1,35 @@
+# Dependencies - install ulang dengan npm install / composer install
+node_modules/
+backend/vendor/
+
+# Environment & kredensial (sensitif - JANGAN di-upload)
+backend/.env
+backend/.env.backup
+backend/.env.backup*
+backend/.env.production
+*.env.local
+.env
+.env.*
+
+# Log & cache
+*.log
+backend/.phpunit.result.cache
+backend/.phpunit.cache/
+
+# OS & editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Data sensitif (backup DB & data test - tetap di komputer, tidak di-upload)
+capstone_perwalian.sql
+DataDosen.txt
+test_dosen.csv
+test_mahasiswa.csv
+backend/RekapPerwalian_backup.txt
+backend/dosen_test.csv
+backend/mahasiswa_ahmad.csv
+backend/mahasiswa_test.csv
+frontend/RekapPerwalian_NOW.txt
+frontend/RekapPerwalian_backup.txt

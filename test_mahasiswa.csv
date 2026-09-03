@@ -1,4 +1,0 @@
-﻿Get-ChildItem .\backend\database\migrations | Sort-Object Name
-nim,nama,email,prodi,angkatan,status
-1224006,Budi Santoso,budi@stmikbandung.ac.id,Teknik Informatika,2024,Aktif
-1224007,Citra Lestari,citra@stmikbandung.ac.id,Sistem Informasi,2024,Aktif
